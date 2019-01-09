@@ -12,7 +12,7 @@ module.exports = function (modelName, schema, deepGetOne, deepSearch, defaultSor
         import: function (authUser, data, callback) {
             var retVal = [];
             async.eachSeries(data, function (n, callback) {
-                model(authUser).save(this(n), function (err, data) {
+                model(authUser).create(this(n), function (err, data) {
                     if (err) {
                         err.val = data;
                         retVal.push(err);
@@ -102,7 +102,7 @@ module.exports = function (modelName, schema, deepGetOne, deepSearch, defaultSor
                 if (err) {
                     callback(err);
                 } else if (_.isEmpty(data2)) {
-                    model(authUser).save(Const, function (err, data3) {
+                    model(authUser).create(Const, function (err, data3) {
                         if (err) {
                             callback(err);
                         } else {
@@ -151,7 +151,7 @@ module.exports = function (modelName, schema, deepGetOne, deepSearch, defaultSor
                     }
                 });
             } else {
-                model(authUser).save(Const, function (err, data2) {
+                model(authUser).create(Const, function (err, data2) {
                     if (err) {
                         callback(err, data2);
                     } else {
