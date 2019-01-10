@@ -33,7 +33,7 @@ module.exports = function (modelName, schema, deepGetOne, deepSearch, defaultSor
             });
         },
         generateExcel: function (data, res) {
-            model(data.authUser).find().deepPopulate(deepGetOne).exec(function (err, data) {
+            model(data.authUser).find().populate(deepGetOne).exec(function (err, data) {
                 var data3 = _.map(data, function (data2) {
                     return modifyForExcel(data2);
                 });
@@ -213,7 +213,7 @@ module.exports = function (modelName, schema, deepGetOne, deepSearch, defaultSor
         getOne: function (data, callback) {
             model(data.authUser).findOne({
                 _id: data._id
-            }).deepPopulate(deepGetOne).exec(callback);
+            }).populate(deepGetOne).exec(callback);
         },
         search: function (data, callback) {
             var maxRow = Config.maxRow;
@@ -252,7 +252,7 @@ module.exports = function (modelName, schema, deepGetOne, deepSearch, defaultSor
 
             model(data.authUser).find(data.filter)
                 .order(options)
-                .deepPopulate(deepSearch)
+                .populate(deepSearch)
                 .keyword(options)
                 .page(options, callback);
         }
